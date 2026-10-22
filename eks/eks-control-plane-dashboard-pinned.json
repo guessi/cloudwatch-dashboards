@@ -1,0 +1,560 @@
+{
+  "variables": [
+    {
+      "type": "property",
+      "property": "region",
+      "inputType": "input",
+      "id": "region",
+      "label": "Region",
+      "visible": false,
+      "defaultValue": "us-east-1"
+    },
+    {
+      "type": "property",
+      "property": "ClusterName",
+      "inputType": "select",
+      "id": "cluster",
+      "label": "Cluster Name",
+      "visible": true,
+      "values": [
+        { "value": "cluster-a" },
+        { "value": "cluster-b" }
+      ],
+      "defaultValue": "cluster-a"
+    }
+  ],
+  "widgets": [
+    {
+      "type": "text",
+      "x": 0,
+      "y": 0,
+      "width": 24,
+      "height": 2,
+      "properties": {
+        "markdown": "# Amazon EKS - Control Plane Metrics (Pinned Clusters)\n⚠️ All listed clusters must be in the same region (set by the hidden `region` variable). Node charts require the **CloudWatch Observability EKS add-on** (Container Insights)."
+      }
+    },
+    {
+      "type": "text",
+      "x": 0,
+      "y": 2,
+      "width": 24,
+      "height": 2,
+      "properties": {
+        "markdown": "## 🖥️ Node Overview - Selected Cluster\nWorker node count and failed node count of the selected cluster."
+      }
+    },
+    {
+      "type": "metric",
+      "x": 0,
+      "y": 4,
+      "width": 12,
+      "height": 6,
+      "properties": {
+        "view": "timeSeries",
+        "stacked": false,
+        "metrics": [
+          [
+            "ContainerInsights",
+            "cluster_node_count",
+            "ClusterName",
+            "placeholder",
+            {
+              "stat": "Average"
+            }
+          ]
+        ],
+        "region": "us-east-1",
+        "period": 300,
+        "title": "Node Count"
+      }
+    },
+    {
+      "type": "metric",
+      "x": 12,
+      "y": 4,
+      "width": 12,
+      "height": 6,
+      "properties": {
+        "view": "timeSeries",
+        "stacked": false,
+        "metrics": [
+          [
+            "ContainerInsights",
+            "cluster_failed_node_count",
+            "ClusterName",
+            "placeholder",
+            {
+              "stat": "Average"
+            }
+          ]
+        ],
+        "region": "us-east-1",
+        "period": 300,
+        "title": "Failed Node Count"
+      }
+    },
+    {
+      "type": "text",
+      "x": 0,
+      "y": 10,
+      "width": 24,
+      "height": 2,
+      "properties": {
+        "markdown": "## 📍 Control Plane - Selected Cluster"
+      }
+    },
+    {
+      "type": "metric",
+      "x": 0,
+      "y": 12,
+      "width": 8,
+      "height": 6,
+      "properties": {
+        "view": "timeSeries",
+        "stacked": false,
+        "metrics": [
+          [
+            "AWS/EKS",
+            "apiserver_request_total",
+            "ClusterName",
+            "placeholder",
+            {
+              "stat": "Sum"
+            }
+          ]
+        ],
+        "region": "us-east-1",
+        "period": 300,
+        "title": "Requests"
+      }
+    },
+    {
+      "type": "metric",
+      "x": 8,
+      "y": 12,
+      "width": 8,
+      "height": 6,
+      "properties": {
+        "view": "timeSeries",
+        "stacked": false,
+        "metrics": [
+          [
+            "AWS/EKS",
+            "apiserver_request_total_4XX",
+            "ClusterName",
+            "placeholder",
+            {
+              "stat": "Sum"
+            }
+          ]
+        ],
+        "region": "us-east-1",
+        "period": 300,
+        "title": "Requests HTTP 4XX"
+      }
+    },
+    {
+      "type": "metric",
+      "x": 16,
+      "y": 12,
+      "width": 8,
+      "height": 6,
+      "properties": {
+        "view": "timeSeries",
+        "stacked": false,
+        "metrics": [
+          [
+            "AWS/EKS",
+            "apiserver_request_total_5XX",
+            "ClusterName",
+            "placeholder",
+            {
+              "stat": "Sum"
+            }
+          ]
+        ],
+        "region": "us-east-1",
+        "period": 300,
+        "title": "Requests HTTP 5XX",
+        "annotations": {
+          "horizontal": [
+            { "label": "Investigate - tune per workload", "value": 5, "color": "#ff9900" }
+          ]
+        }
+      }
+    },
+    {
+      "type": "metric",
+      "x": 0,
+      "y": 18,
+      "width": 8,
+      "height": 6,
+      "properties": {
+        "view": "timeSeries",
+        "stacked": false,
+        "metrics": [
+          [
+            "AWS/EKS",
+            "apiserver_request_total_429",
+            "ClusterName",
+            "placeholder",
+            {
+              "stat": "Sum"
+            }
+          ]
+        ],
+        "region": "us-east-1",
+        "period": 300,
+        "title": "Requests HTTP 429",
+        "annotations": {
+          "horizontal": [
+            { "label": "Throttling - tune per workload", "value": 5, "color": "#ff9900" }
+          ]
+        }
+      }
+    },
+    {
+      "type": "metric",
+      "x": 8,
+      "y": 18,
+      "width": 8,
+      "height": 6,
+      "properties": {
+        "view": "timeSeries",
+        "stacked": false,
+        "metrics": [
+          [
+            "AWS/EKS",
+            "etcd_mvcc_db_total_size_in_use_in_bytes",
+            "ClusterName",
+            "placeholder",
+            {
+              "stat": "Maximum",
+              "label": "In use"
+            }
+          ],
+          [
+            "AWS/EKS",
+            "etcd_mvcc_db_total_size_in_bytes",
+            "ClusterName",
+            "placeholder",
+            {
+              "stat": "Maximum",
+              "label": "Physically allocated"
+            }
+          ]
+        ],
+        "region": "us-east-1",
+        "period": 300,
+        "title": "Database usage"
+      }
+    },
+    {
+      "type": "metric",
+      "x": 16,
+      "y": 18,
+      "width": 8,
+      "height": 6,
+      "properties": {
+        "view": "timeSeries",
+        "stacked": false,
+        "metrics": [
+          [
+            "AWS/EKS",
+            "scheduler_schedule_attempts_SCHEDULED",
+            "ClusterName",
+            "placeholder",
+            {
+              "stat": "Sum"
+            }
+          ],
+          [
+            "AWS/EKS",
+            "scheduler_schedule_attempts_UNSCHEDULABLE",
+            "ClusterName",
+            "placeholder",
+            {
+              "stat": "Sum"
+            }
+          ],
+          [
+            "AWS/EKS",
+            "scheduler_schedule_attempts_ERROR",
+            "ClusterName",
+            "placeholder",
+            {
+              "stat": "Sum"
+            }
+          ]
+        ],
+        "region": "us-east-1",
+        "period": 300,
+        "title": "Scheduler attempts"
+      }
+    },
+    {
+      "type": "metric",
+      "x": 0,
+      "y": 24,
+      "width": 8,
+      "height": 6,
+      "properties": {
+        "view": "timeSeries",
+        "stacked": false,
+        "metrics": [
+          [
+            "AWS/EKS",
+            "scheduler_pending_pods_ACTIVEQ",
+            "ClusterName",
+            "placeholder",
+            {
+              "stat": "Sum"
+            }
+          ],
+          [
+            "AWS/EKS",
+            "scheduler_pending_pods_UNSCHEDULABLE",
+            "ClusterName",
+            "placeholder",
+            {
+              "stat": "Sum"
+            }
+          ],
+          [
+            "AWS/EKS",
+            "scheduler_pending_pods_BACKOFF",
+            "ClusterName",
+            "placeholder",
+            {
+              "stat": "Sum"
+            }
+          ],
+          [
+            "AWS/EKS",
+            "scheduler_pending_pods_GATED",
+            "ClusterName",
+            "placeholder",
+            {
+              "stat": "Sum"
+            }
+          ]
+        ],
+        "region": "us-east-1",
+        "period": 300,
+        "title": "Pending pods"
+      }
+    },
+    {
+      "type": "metric",
+      "x": 8,
+      "y": 24,
+      "width": 8,
+      "height": 6,
+      "properties": {
+        "view": "timeSeries",
+        "stacked": false,
+        "metrics": [
+          [
+            "AWS/EKS",
+            "apiserver_request_duration_seconds_GET_P99",
+            "ClusterName",
+            "placeholder",
+            {
+              "stat": "Average"
+            }
+          ],
+          [
+            "AWS/EKS",
+            "apiserver_request_duration_seconds_POST_P99",
+            "ClusterName",
+            "placeholder",
+            {
+              "stat": "Average"
+            }
+          ],
+          [
+            "AWS/EKS",
+            "apiserver_request_duration_seconds_PUT_P99",
+            "ClusterName",
+            "placeholder",
+            {
+              "stat": "Average"
+            }
+          ],
+          [
+            "AWS/EKS",
+            "apiserver_request_duration_seconds_PATCH_P99",
+            "ClusterName",
+            "placeholder",
+            {
+              "stat": "Average"
+            }
+          ],
+          [
+            "AWS/EKS",
+            "apiserver_request_duration_seconds_LIST_P99",
+            "ClusterName",
+            "placeholder",
+            {
+              "stat": "Average"
+            }
+          ],
+          [
+            "AWS/EKS",
+            "apiserver_request_duration_seconds_DELETE_P99",
+            "ClusterName",
+            "placeholder",
+            {
+              "stat": "Average"
+            }
+          ]
+        ],
+        "region": "us-east-1",
+        "period": 300,
+        "title": "API server request latency",
+        "annotations": {
+          "horizontal": [
+            { "label": "1s P99 - AWS healthy guidance", "value": 1, "color": "#ff9900" }
+          ]
+        }
+      }
+    },
+    {
+      "type": "metric",
+      "x": 16,
+      "y": 24,
+      "width": 8,
+      "height": 6,
+      "properties": {
+        "view": "timeSeries",
+        "stacked": false,
+        "metrics": [
+          [
+            "AWS/EKS",
+            "apiserver_current_inflight_requests_MUTATING",
+            "ClusterName",
+            "placeholder",
+            {
+              "stat": "Sum"
+            }
+          ],
+          [
+            "AWS/EKS",
+            "apiserver_current_inflight_requests_READONLY",
+            "ClusterName",
+            "placeholder",
+            {
+              "stat": "Sum"
+            }
+          ]
+        ],
+        "region": "us-east-1",
+        "period": 300,
+        "title": "API server current inflight requests"
+      }
+    },
+    {
+      "type": "metric",
+      "x": 0,
+      "y": 30,
+      "width": 8,
+      "height": 6,
+      "properties": {
+        "view": "timeSeries",
+        "stacked": false,
+        "metrics": [
+          [
+            "AWS/EKS",
+            "apiserver_admission_webhook_request_total_ADMIT",
+            "ClusterName",
+            "placeholder",
+            {
+              "stat": "Sum"
+            }
+          ],
+          [
+            "AWS/EKS",
+            "apiserver_admission_webhook_request_total_VALIDATING",
+            "ClusterName",
+            "placeholder",
+            {
+              "stat": "Sum"
+            }
+          ]
+        ],
+        "region": "us-east-1",
+        "period": 300,
+        "title": "Webhook requests"
+      }
+    },
+    {
+      "type": "metric",
+      "x": 8,
+      "y": 30,
+      "width": 8,
+      "height": 6,
+      "properties": {
+        "view": "timeSeries",
+        "stacked": false,
+        "metrics": [
+          [
+            "AWS/EKS",
+            "apiserver_admission_webhook_rejection_count_ADMIT",
+            "ClusterName",
+            "placeholder",
+            {
+              "stat": "Sum"
+            }
+          ],
+          [
+            "AWS/EKS",
+            "apiserver_admission_webhook_rejection_count_VALIDATING",
+            "ClusterName",
+            "placeholder",
+            {
+              "stat": "Sum"
+            }
+          ]
+        ],
+        "region": "us-east-1",
+        "period": 300,
+        "title": "Webhook request rejections"
+      }
+    },
+    {
+      "type": "metric",
+      "x": 16,
+      "y": 30,
+      "width": 8,
+      "height": 6,
+      "properties": {
+        "view": "timeSeries",
+        "stacked": false,
+        "metrics": [
+          [
+            "AWS/EKS",
+            "apiserver_admission_webhook_admission_duration_seconds_ADMIT_P99",
+            "ClusterName",
+            "placeholder",
+            {
+              "stat": "Average"
+            }
+          ],
+          [
+            "AWS/EKS",
+            "apiserver_admission_webhook_admission_duration_seconds_VALIDATING_P99",
+            "ClusterName",
+            "placeholder",
+            {
+              "stat": "Average"
+            }
+          ]
+        ],
+        "region": "us-east-1",
+        "period": 300,
+        "title": "Webhook request latency P99"
+      }
+    }
+  ]
+}
