@@ -67,7 +67,7 @@
       "width": 24,
       "height": 2,
       "properties": {
-        "markdown": "# Amazon EKS - Control Plane Metrics\n⚠️ Covers the control plane only. All this info is available in the EKS console's **Observability** tab → **Control plane** sub-tab, with basic node count / failed node count included if the **CloudWatch Observability EKS add-on** (Container Insights) is installed."
+        "markdown": "# Amazon EKS - Control Plane Metrics\n⚠️ Focused on the control plane (`AWS/EKS` metrics), also available in the EKS console's **Observability** tab → **Control plane** sub-tab. The Node Overview section additionally uses Container Insights metrics and requires the **CloudWatch Observability EKS add-on**."
       }
     },
     {

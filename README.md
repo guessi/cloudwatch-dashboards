@@ -8,7 +8,7 @@ A collection of ready-to-import Amazon CloudWatch dashboard templates for variou
 
 | Service | Dashboard | Description |
 |---|---|---|
-| EKS | [`eks/eks-control-plane-dashboard.json`](eks/eks-control-plane-dashboard.json) | Amazon EKS control plane metrics (API server, etcd). Covers control plane only — install the CloudWatch Observability EKS add-on for node/pod-level data. |
+| EKS | [`eks/eks-control-plane-dashboard.json`](eks/eks-control-plane-dashboard.json) | Amazon EKS control plane metrics (API server, etcd, scheduler, webhooks), plus node count / failed node count across clusters. The node charts require the CloudWatch Observability EKS add-on (Container Insights). |
 
 ## Usage
 
@@ -36,6 +36,11 @@ aws cloudwatch put-dashboard \
   --dashboard-name <your-dashboard-name> \
   --dashboard-body file:///tmp/eks-control-plane-dashboard.json
 ```
+
+## Notes
+
+- The `region` and `ClusterName` values written in each widget (`us-east-1`, `placeholder`) are placeholders. The dashboard variables at the top replace them in every widget at render time.
+- The threshold lines on the HTTP 5XX and 429 charts (value `5`, per 5-minute period) are starting points only. Tune them to your workload.
 
 ## License
 
