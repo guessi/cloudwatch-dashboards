@@ -236,6 +236,7 @@
           ]
         ],
         "region": "us-east-1",
+        "period": 300,
         "title": "Requests"
       }
     },
@@ -260,6 +261,7 @@
           ]
         ],
         "region": "us-east-1",
+        "period": 300,
         "title": "Requests HTTP 4XX"
       }
     },
@@ -284,6 +286,7 @@
           ]
         ],
         "region": "us-east-1",
+        "period": 300,
         "title": "Requests HTTP 5XX",
         "annotations": {
           "horizontal": [
@@ -313,6 +316,7 @@
           ]
         ],
         "region": "us-east-1",
+        "period": 300,
         "title": "Requests HTTP 429",
         "annotations": {
           "horizontal": [
@@ -353,6 +357,7 @@
           ]
         ],
         "region": "us-east-1",
+        "period": 300,
         "title": "Database usage"
       }
     },
@@ -395,6 +400,7 @@
           ]
         ],
         "region": "us-east-1",
+        "period": 300,
         "title": "Scheduler attempts"
       }
     },
@@ -446,6 +452,7 @@
           ]
         ],
         "region": "us-east-1",
+        "period": 300,
         "title": "Pending pods"
       }
     },
@@ -515,6 +522,7 @@
           ]
         ],
         "region": "us-east-1",
+        "period": 300,
         "title": "API server request latency",
         "annotations": {
           "horizontal": [
@@ -553,6 +561,7 @@
           ]
         ],
         "region": "us-east-1",
+        "period": 300,
         "title": "API server current inflight requests"
       }
     },
@@ -586,6 +595,7 @@
           ]
         ],
         "region": "us-east-1",
+        "period": 300,
         "title": "Webhook requests"
       }
     },
@@ -619,6 +629,7 @@
           ]
         ],
         "region": "us-east-1",
+        "period": 300,
         "title": "Webhook request rejections"
       }
     },
@@ -652,6 +663,7 @@
           ]
         ],
         "region": "us-east-1",
+        "period": 300,
         "title": "Webhook request latency P99"
       }
     }
